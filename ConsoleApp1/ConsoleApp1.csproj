@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HelloModule.cs" />
-    <Compile Include="ImageStreamingServer.cs" />
     <Compile Include="JpegStreamerServer.cs" />
     <Compile Include="MjpegWriter.cs" />
     <Compile Include="MyBootstrapper.cs" />

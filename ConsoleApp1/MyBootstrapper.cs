@@ -1,17 +1,12 @@
 ﻿using Nancy;
+using Nancy.TinyIoc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nancy.TinyIoc;
-using rtaNetworking.Streaming;
 
 namespace ConsoleApp1
 {
   public class MyBootstrapper : DefaultNancyBootstrapper
   {
-    ImageStreamingServer _liveImageServer;
     StreamServer _streamServer;
     protected override void ConfigureApplicationContainer(TinyIoCContainer container)
     {
@@ -26,10 +21,8 @@ namespace ConsoleApp1
         "D:\\pictures\\6.png",
 
       };
-      _liveImageServer = new ImageStreamingServer(images);
       _streamServer = new JpegStreamServer();
 
-      container.Register<ImageStreamingServer>(_liveImageServer);
       container.Register<StreamServer>(_streamServer);
 
     }

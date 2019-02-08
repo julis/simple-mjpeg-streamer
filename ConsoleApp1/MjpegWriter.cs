@@ -11,7 +11,7 @@ using System.Drawing;
 // Date         : April 2012
 // -------------------------------------------------
 
-namespace rtaNetworking.Streaming
+namespace ConsoleApp1
 {
 
     /// <summary>

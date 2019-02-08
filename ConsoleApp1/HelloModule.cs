@@ -1,29 +1,22 @@
 ﻿using Nancy;
-using rtaNetworking.Streaming;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
   public class HelloModule : NancyModule
   {
-    private ImageStreamingServer _liveImageServer;
     private StreamServer _streamServer;
-    public HelloModule(ImageStreamingServer liveImageServer, StreamServer streamServer)
+    public HelloModule(StreamServer streamServer)
     {
-      _liveImageServer = liveImageServer;
       _streamServer = streamServer;
 
       Get["/"] = parameters => "Hello World";
       Get["/live-image/start"] = StartLiveImage;
       Get["/live-image/stop"] = StopLiveImage;
-      Get["/send/{filename}"] = SendImage;
       Get["/live-simulation"] = SimulateLiveImage;
     }
 
@@ -35,18 +28,10 @@ namespace ConsoleApp1
       return HttpStatusCode.OK;
     }
 
-    private dynamic SendImage(dynamic arg)
-    {
-      
-
-      return HttpStatusCode.OK;
-    }
-
     
 
     private dynamic StopLiveImage(dynamic arg)
     {
-      _liveImageServer.Stop();
       _streamServer.Stop();
       return HttpStatusCode.OK;
     }
@@ -95,31 +80,6 @@ namespace ConsoleApp1
             _readWriteLock.ReleaseWriterLock();
           }
           
-        }
-      }
-    }
-
-    public static IEnumerable<Image> SendFrames()
-    {
-      List<String> images = new List<String>()
-        {
-          "D:\\pictures\\1.png",
-          "D:\\pictures\\2.png",
-          "D:\\pictures\\3.png",
-          "D:\\pictures\\4.png",
-          "D:\\pictures\\5.png",
-          "D:\\pictures\\6.png",
-
-        };
-
-      while (true)
-      {
-        foreach (var image in images)
-        {
-          Thread.Sleep(100);
-
-          Image img = Image.FromFile(image);
-          yield return img;
         }
       }
     }
